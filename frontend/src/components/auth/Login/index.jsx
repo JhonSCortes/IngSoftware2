@@ -20,13 +20,17 @@ const LoginComponent = (props) => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    const payload = {email, password}
-    if (sendRequest(payload)) {
-      alert('Successfully logged.');
-      props.goToDashboard();
-    } else {
-      alert('Invalid credentials.');
-    }
+    const payload = {email, password};
+    const requestResult = sendRequest(payload);
+    requestResult.then((res) => {
+      console.log(res);
+      if (res) {
+        alert('Successfully logged.');
+        props.goToDashboard();
+      } else {
+        alert('Invalid credentials. User not found');
+      }
+    });
   }
 
   const changeToRegisterComponent = (event) => {

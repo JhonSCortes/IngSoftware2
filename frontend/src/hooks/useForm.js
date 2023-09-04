@@ -17,14 +17,16 @@ const useForm = (typeForm) => {
   const sendForm = (payload) => {
     if (typeForm === 'register') {
       const requestResult = sendRegisterForm(payload);
-      return returnResult(requestResult);
+      return returnResult(requestResult.then((res) => returnResult(res)));
     } else if (typeForm === 'login') {
       const requestResult = sendLoginForm(payload);
-      requestResult.then((res) => {
-        saveSessionToken(res);
-        setSession(res);
+      return requestResult.then((res) => {
+        if (returnResult(res)) {
+          saveSessionToken(res);
+          setSession(res);
+        }
+        return returnResult(res);
       });
-      return returnResult(requestResult);
     }
   };
 
