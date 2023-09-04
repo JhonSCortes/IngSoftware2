@@ -1,0 +1,15 @@
+.double_input_field {
+    border: none;
+    border-radius: .25em;
+    background: #F3F4F6;
+    align-self: stretch;
+    outline: none;
+    padding: .7em .4em;
+    margin: .2em .2em .8em .2em;
+
+    color: #000;
+    font-family: 'Inter', 'sans-serif';
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
