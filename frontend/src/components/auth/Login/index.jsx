@@ -23,7 +23,6 @@ const LoginComponent = (props) => {
     const payload = {email, password};
     const requestResult = sendRequest(payload);
     requestResult.then((res) => {
-      console.log(res);
       if (res) {
         alert('Successfully logged.');
         props.goToDashboard();
