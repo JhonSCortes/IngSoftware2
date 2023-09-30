@@ -27,6 +27,7 @@ body {
   margin: 0;
   display: flex;
   place-items: center;
+  justify-content: center;
   min-width: 320px;
   min-height: 100vh;
   background: linear-gradient(180deg, #3730A3 0%, #312E81 100%);
