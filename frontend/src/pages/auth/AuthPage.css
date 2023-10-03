@@ -1,69 +1,69 @@
 #root {
-    display: flex;
+  display: flex;
 }
 
-.left-side-component {  
-    background: #FFFF;
+.left-side-component {
+  background: #ffff;
 
-    padding: 2em 3em;
-    width: 50%;
-    height: calc(100vh + 4em);
-    text-align: left;
+  padding: 2em 3em;
+  width: 50%;
+  height: calc(100vh + 4em);
+  text-align: left;
 }
 
 .auth_body {
-    padding: 3em 5em;
-    text-align: center;
+  padding: 3em 5em;
+  text-align: center;
 }
 
 .auth_header {
-    padding: .2em 0 1.5em 0;
-    text-align: left;
+  padding: 0.2em 0 1.5em 0;
+  text-align: left;
 }
 
 .auth_logo {
-    background: #EEF2FF;
-    border-radius: .25em;
-    padding: .45em .7em;
+  background: #eef2ff;
+  border-radius: 0.25em;
+  padding: 0.45em 0.7em;
 
-    color: var(--Primary, #4F46E5);
-    font-family: Inter;
-    font-size: 24px;
-    font-weight: 600;
+  color: var(--Primary, #4f46e5);
+  font-family: Inter;
+  font-size: 24px;
+  font-weight: 600;
 }
 
 .auth_string {
-    color: #000000;
-    text-align: left;
-    margin-top: 1.75em;
+  color: #000000;
+  text-align: left;
+  margin-top: 1.75em;
 }
 
 .auth_subtext {
-    color: #4B5563;
-}  
+  color: #4b5563;
+}
 
 .auth_footer_text {
-    display: block;
-    color: var(--Muted, #4B5563);
-    text-align: center;
-    background: none;
-    border: none;
-    padding: 0 0 0.4em 0;
+  display: block;
+  color: var(--Muted, #4b5563);
+  text-align: center;
+  background: none;
+  border: none;
+  padding: 0 0 0.4em 0;
 
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    outline: none;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  outline: none;
 }
 
 .auth_footer_redirect {
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
 
-    color: var(--Primary, #4F46E5);
+  color: var(--Primary, #4f46e5);
 }

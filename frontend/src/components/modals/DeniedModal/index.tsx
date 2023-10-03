@@ -1,13 +1,17 @@
-import React from 'react'
 import './DeniedModal.css';
 import { useNavigate } from 'react-router-dom';
 
-const DeniedModal = (props) => {
-  const navigateTo = useNavigate();
+interface Props {
+    errorText: string
+}
 
-  function moveToLogin() {
-    navigateTo('/auth');
-  }
+const DeniedModal: React.FC<Props> = (props) => {
+    const navigateTo = useNavigate();
+
+    function moveToLogin() {
+        navigateTo('/auth');
+    }
+
     return (
         <>
             <div className="card">
