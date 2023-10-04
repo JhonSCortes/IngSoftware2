@@ -1,4 +1,4 @@
-const saveSessionToken = (sessionToken) => {
+const saveSessionToken = (sessionToken: string) => {
     localStorage.setItem('sessionToken', sessionToken);
 }
 

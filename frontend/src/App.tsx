@@ -1,7 +1,7 @@
 import { AuthRoutes } from './routes/AuthRoutes';
 import { DashboardRoutes } from './routes/DashboardRoutes';
 import { Route, Routes, Navigate } from 'react-router-dom';
-import SimpleModal from './components/modals/SimpleModal';
+import DeniedModal from './components/modals/DeniedModal';
 import PrivateRoutes from './components/auth/PrivateRoutes';
 import './App.css';
 
@@ -18,10 +18,11 @@ function App() {
             <DashboardRoutes />
           </PrivateRoutes>
         } />
-        <Route path='/*' element={ <SimpleModal text='Error 404: Page was not found ;(' /> } />
+        <Route path='/*' element={ <DeniedModal errorText='Error 404: Page not found...' /> } />
       </Routes>
     </>
   )
 }
 
 export default App;
+

@@ -1,11 +1,14 @@
 import React from "react";
 import './CheckboxComponent.css';
+import { CheckboxInputProps } from "../../../interfaces/components";
 
-const CheckboxComponent = (props) => {
+const CheckboxComponent: React.FC<CheckboxInputProps> = (props) => {
 
-  const onInputChange = (event) => {
+  const onInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (props.label && props.inputController) {
       props.inputController(props.label, event.target.value);
     }
+  }
 
   return (
     <>

@@ -10,7 +10,7 @@ const AuthPage = () => {
   const [authMethod, setAuthMethod] = useState(false);
   const navigateTo = useNavigate();
 
-  function handleAuthComponents () {
+  function handleAuthComponents() {
     setAuthMethod(!authMethod);
   }
 
@@ -21,7 +21,7 @@ const AuthPage = () => {
   return (
     <>
       <div className='left-side-component'>
-        { authMethod? <RegisterComponent controllerFunction={handleAuthComponents} /> : <LoginComponent controllerFunction={handleAuthComponents} goToDashboard={moveToDashboard}/> }
+        {authMethod ? <RegisterComponent controllerFunction={handleAuthComponents} /> : <LoginComponent controllerFunction={handleAuthComponents} goToDashboard={moveToDashboard} />}
       </div>
       <RightBackgroundComponent image={authMethod} />
     </>

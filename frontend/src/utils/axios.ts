@@ -1,10 +1,11 @@
 import axios from 'axios';
+import { loginPayload, registerPayload } from '../interfaces/utils';
 
 const BaseBackendURI = import.meta.env.VITE_BASE_API_URI;
 
-const sendRegisterForm = async (payload) => {
+const sendRegisterForm = async (payload: registerPayload) => {
     try {
-        const res = await axios.post(BaseBackendURI+'/auth/register', {
+        const res = await axios.post(BaseBackendURI + '/auth/register', {
             email: payload.email,
             password: payload.password,
             username: payload.name
@@ -15,9 +16,9 @@ const sendRegisterForm = async (payload) => {
     }
 }
 
-const sendLoginForm = async (payload) => {
+const sendLoginForm = async (payload: loginPayload): Promise<string | null> => {
     try {
-        const res = await axios.post(BaseBackendURI+'/auth/login', {
+        const res = await axios.post(BaseBackendURI + '/auth/login', {
             email: payload.email,
             password: payload.password
         });
@@ -27,4 +28,4 @@ const sendLoginForm = async (payload) => {
     }
 }
 
-export {sendRegisterForm, sendLoginForm};
+export { sendRegisterForm, sendLoginForm };
