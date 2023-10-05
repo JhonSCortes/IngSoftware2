@@ -1,23 +1,13 @@
-import mongoose from 'mongoose';
-
-// User Config
-const UserSchema = new mongoose.Schema({
-  email: { type: String, required: true },
-  username: { type: String, required: true },
-  authentication: {
-    password: { type: String, required: true, select: false },
-    salt: { type: String, select: false },
-    sessionToken: { type: String, select: false },
-  },
-});
-
-export const UserModel = mongoose.model('User', UserSchema);
+import { prisma } from '../index';
+import { User, UserToBeCreated } from 'interfaces/users';
 
 // User Actions
-export const getUsers = () => UserModel.find();
-export const getUserByEmail = (email: string) => UserModel.findOne({ email });
-export const getUserBySessionToken = (sessionToken: string) => UserModel.findOne({ 'authentication.sessionToken': sessionToken });
-export const getUserById = (id: string) => UserModel.findById(id);
-export const createUser = (values: Record<string, any>) => new UserModel(values).save().then((user) => user.toObject());
-export const deleteUserById = (id: string) => UserModel.findOneAndDelete({ _id: id });
-export const updateUserById = (id: string, values: Record<string, any>) => UserModel.findByIdAndUpdate(id, values);
+export const getUsers = () => prisma.users.findMany();
+export const getUserById = (id: string) => prisma.users.findUnique({ where: { id } });
+export const updateUserRecord = (id: string, username: string) => prisma.users.update({ where: { id }, data: { username: username } });
+export const updateUserSession = (user: User) => prisma.users.update({ where: { id: user.id }, data: { authentication: { update: { sessionToken: user.authentication.sessionToken } } } });
+export const deleteUserRecord = (id: string) => prisma.users.delete({ where: { id } });
+export const getUserByEmail = (email: string) => prisma.users.findFirst({ where: { email: email } });
+export const getUserAuthentication = (email: string) => prisma.users.findFirst({ where: { email: email } });
+export const createUserRecord = (newUser: UserToBeCreated) => prisma.users.create({ data: { v: 0, email: newUser.email, username: newUser.username, authentication: { salt: newUser.authentication.salt, password: newUser.authentication.password, sessionToken: "" } } });
+export const getUserBySessionToken = (sessionToken: string) => prisma.users.findFirst({ where: { authentication: { is: { sessionToken: sessionToken } } } });
