@@ -1,5 +1,5 @@
 import express from 'express';
-import { getUserByEmail, createUserRecord, getUserAuthentication, updateUserSession } from '../db/users';
+import { getUserByEmail, createUserRecord, getUserAuthentication, updateUserSession } from '../actions/users';
 import { authentication, random } from '../helpers';
 import { UserToBeCreated } from 'interfaces/users';
 
