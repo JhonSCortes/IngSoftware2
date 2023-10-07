@@ -1,0 +1,1 @@
+export { VuesaxBoldPause } from "./VuesaxBoldPause";

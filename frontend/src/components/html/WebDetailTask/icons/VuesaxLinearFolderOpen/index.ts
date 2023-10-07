@@ -1,0 +1,1 @@
+export { VuesaxLinearFolderOpen } from "./VuesaxLinearFolderOpen";
