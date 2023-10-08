@@ -1,1 +1,0 @@
-export { VuesaxLinearUserOctagon } from "./VuesaxLinearUserOctagon";

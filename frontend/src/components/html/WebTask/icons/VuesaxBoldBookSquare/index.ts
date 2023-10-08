@@ -1,1 +1,0 @@
-export { VuesaxBoldBookSquare } from "./VuesaxBoldBookSquare";

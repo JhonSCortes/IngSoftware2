@@ -1,1 +1,0 @@
-export { VuesaxLinearSort } from "./VuesaxLinearSort";

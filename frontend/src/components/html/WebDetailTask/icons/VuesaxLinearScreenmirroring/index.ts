@@ -1,1 +1,0 @@
-export { VuesaxLinearScreenmirroring } from "./VuesaxLinearScreenmirroring";
