@@ -1,1 +1,0 @@
-export { VuesaxLinearVolumeHigh } from "./VuesaxLinearVolumeHigh";
