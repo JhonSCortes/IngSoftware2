@@ -11,32 +11,30 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
   isModalOpen,
   setIsModalOpen,
 }) => {
-    const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        ownerId: '',
-      });
-      const [errorMessage, setErrorMessage] = useState('');
-      const [successMessage, setSuccessMessage] = useState('');
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    ownerId: '',
+  });
 
-      const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData({
-          ...formData,
-          [name]: value,
-        });
-      };
-    
-      const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        try {
-          await axios.post('http://localhost:8080/project', formData);
-          setSuccessMessage('Proyecto creado con éxito.');
-          // Aquí puedes hacer algo adicional, como cerrar el modal o redirigir a otra página si es necesario.
-        } catch (error) {
-          setErrorMessage('Error al crear el proyecto.');
-        }
-      };
+  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      await axios.post('http://localhost:8080/project', formData);
+      alert('Proyecto creado con éxito.');
+      // Aquí puedes hacer algo adicional, como cerrar el modal o redirigir a otra página si es necesario.
+    } catch (error) {
+      alert('Error al crear el proyecto.');
+    }
+  };
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -66,36 +64,36 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
           <Typography id="modal-modal-title" variant="h6" component="h2">
             Crear Proyecto
           </Typography>
-            <form onSubmit={handleSubmit}>
-              <TextField
-                label="Project Name"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                name="name"
-                value={formData.name}
-                onChange={handleFormChange}
-              />
-              <TextField
-                 label="Description"
-                 variant="outlined"
-                 fullWidth
-                 margin="normal"
-                 multiline
-                 rows={4}
-                 name="description"
-                 value={formData.description}
-                 onChange={handleFormChange}
-              />
-              <TextField
-                label="Owner ID"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                name="ownerId"
-                value={formData.ownerId}
-                onChange={handleFormChange}
-              />{/* 
+          <form onSubmit={handleSubmit}>
+            <TextField
+              label="Project Name"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="name"
+              value={formData.name}
+              onChange={handleFormChange}
+            />
+            <TextField
+              label="Description"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              multiline
+              rows={4}
+              name="description"
+              value={formData.description}
+              onChange={handleFormChange}
+            />
+            <TextField
+              label="Owner ID"
+              variant="outlined"
+              fullWidth
+              margin="normal"
+              name="ownerId"
+              value={formData.ownerId}
+              onChange={handleFormChange}
+            />{/* 
               <TextField
                 variant="outlined"
                 fullWidth
@@ -114,12 +112,10 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
                 value={formData.endDate}
                 onChange={handleFormChange}
               /> */}
-              <Button variant="contained" color="primary" type="submit">
-                Create
-              </Button>
-            </form>
-            {errorMessage && <div>Error: {errorMessage}</div>}
-            {successMessage && <div>Éxito: {successMessage}</div>}
+            <Button variant="contained" color="primary" type="submit">
+              Create
+            </Button>
+          </form>
         </Box>
       </Modal>
 

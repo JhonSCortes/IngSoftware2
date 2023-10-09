@@ -2,15 +2,29 @@ import React, { useEffect, useState } from "react";
 import "./Landing.css";
 import { getAllProjects } from "../../../utils/axios";
 import { Button } from "@mui/material";
+import axios from "axios";
 import CreateProjectComponent from "../../modals/CreateProject";
+import EditProjectComponent from "../../modals/EditProject";
+import { Project } from "../../../interfaces/components";
 
 const LandingComponent: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [projectInfo, setProjectInfo] = useState({ id: "", name: "", description: "", startDate: new Date("2020-09-12"), endDate: new Date("2020-09-12") });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
+  };
+
+  const deleteProject = async (id: string) => {
+    try {
+      await axios.delete(`http://localhost:8080/project/${id}`);
+      alert('Proyecto borrado con éxito.');
+      // Aquí puedes hacer algo adicional, como cerrar el modal o redirigir a otra página si es necesario.
+    } catch (error) {
+      alert('Error al borrar el proyecto.');
+    }
   };
 
   useEffect(() => {
@@ -24,15 +38,7 @@ const LandingComponent: React.FC = () => {
     };
 
     fetchData();
-  }, []);
-
-  interface Project {
-    id: string;
-    name: string;
-    description: string;
-    startDate: Date;
-    endDate: Date;
-  }
+  }, [isModalOpen, projects]);
 
   return (
     <>
@@ -81,15 +87,15 @@ const LandingComponent: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="card-time">{project.description}hrs</div>
+                  <div className="card-time">{project.description}</div>
                   <p className="recent">
                     Inicio: {new Date(project.startDate).toLocaleDateString()}{" "}
                     Fin: {new Date(project.startDate).toLocaleDateString()}
                   </p>
                   <div>
-                    <Button variant="contained">Edit</Button>
-
+                    <Button color="warning" variant="contained" onClick={() => { setProjectInfo({ id: project.id, name: project.name, description: project.description, startDate: project.startDate, endDate: project.endDate }); openModal() }}>Edit</Button>
                     <Button variant="contained">Go to task</Button>
+                    <Button color="error" variant="contained" onClick={() => deleteProject(project.id)}>Delete</Button>
                   </div>
                 </div>
               </div>
@@ -133,7 +139,7 @@ const LandingComponent: React.FC = () => {
       </Modal> */}
 
       {/* Renderiza el componente del modal con la variable isModalOpen */}
-      <CreateProjectComponent isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      {projectInfo.name ? <EditProjectComponent setProjectInfo={setProjectInfo} Project={projectInfo} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> : <CreateProjectComponent isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
     </>
   );
 };
