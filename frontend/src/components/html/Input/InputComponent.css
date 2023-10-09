@@ -1,55 +1,55 @@
 .input_label {
-    color: #000;
-    font-family: 'Inter', 'sans-serif';
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: #000;
+  font-family: "Inter", "sans-serif";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 
-    text-align: left;
-    margin-top: .55em;
+  text-align: left;
+  margin-top: 0.55em;
 }
 
 .input_field {
-    border: none;
-    border-radius: .25em;
-    background: #F3F4F6;
-    align-self: stretch;
-    outline: none;
-    padding: .7em .4em;
-    margin-top: .2em;
-    margin-bottom: .8em;
+  border: none;
+  border-radius: 0.25em;
+  background: #f3f4f6;
+  align-self: stretch;
+  outline: none;
+  padding: 0.7em 0.4em;
+  margin-top: 0.2em;
+  margin-bottom: 0.8em;
 
-    color: #000;
-    font-family: 'Inter', 'sans-serif';
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+  color: #000;
+  font-family: "Inter", "sans-serif";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 .input_submit {
-    background: var(--Primary, #4F46E5);
-    border: none;
-    border-radius: 6px;
-    box-shadow: 0px 30px 60px 0px rgba(79, 70, 229, 0.15);
-    cursor: pointer;
+  background: var(--Primary, #4f46e5);
+  border: none;
+  border-radius: 6px;
+  box-shadow: 0px 30px 60px 0px rgba(79, 70, 229, 0.15);
+  cursor: pointer;
 
-    padding: .8em 2em;
-    margin: 1em 0 0.2em 0;
-    align-items: center;
-    gap: 10px;
-    align-self: stretch;
+  padding: 0.8em 2em;
+  margin: 1em 0 0.2em 0;
+  align-items: center;
+  gap: 10px;
+  align-self: stretch;
 
-    color: #FFF;
-    font-family: Inter;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: #fff;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .password_redirect {
-    margin-left: 60%;
-    cursor: pointer;
+  margin-left: 60%;
+  cursor: pointer;
 }

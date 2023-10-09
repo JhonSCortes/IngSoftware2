@@ -1,36 +1,36 @@
 .checkbox_div {
-    text-align: justify;
-    margin-top: .55em;
+  text-align: justify;
+  margin-top: 0.55em;
 }
 
 .checkbox_text {
-    color: #000000;
-    font-family: 'Inter', 'sans-serif';
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  color: #000000;
+  font-family: "Inter", "sans-serif";
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .checkbox_field {
-    display: block;
+  display: block;
 
-    appearance: none;
-    background-color: #F3F4F6;
-    border: .3em solid #F3F4F6;
-    border-radius: .25em;
-	padding: .5em .5em;
-    margin: 1em .65em 0 0;
+  appearance: none;
+  background-color: #f3f4f6;
+  border: 0.3em solid #f3f4f6;
+  border-radius: 0.25em;
+  padding: 0.5em 0.5em;
+  margin: 1em 0.65em 0 0;
 
-    cursor: pointer;
-    transition: all .45s;
+  cursor: pointer;
+  transition: all 0.45s;
 }
 
 .checkbox_field:hover {
-    transform: scale(1.05);
-    border-color: #4F46E5;
+  transform: scale(1.05);
+  border-color: #4f46e5;
 }
 
 .checkbox_field:checked {
-    background-color: #4F46E5;
+  background-color: #4f46e5;
 }

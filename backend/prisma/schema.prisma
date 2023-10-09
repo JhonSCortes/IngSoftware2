@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+type UsersAuthentication {
+  password     String
+  salt         String
+  sessionToken String
+}
+
+model Users {
+  id             String              @id @default(auto()) @map("_id") @db.ObjectId
+  v              Int                 @map("__v")
+  authentication UsersAuthentication
+  email          String
+  username       String
+  projects       Project[]
+}
+
+model Project {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String
+  owner       Users?    @relation(fields: [ownerId], references: [id])
+  ownerId     String?   @map("user_id") @db.ObjectId
+  tasks       Task[]
+  startDate   DateTime?
+  endDate     DateTime?
+}
+
+// Definición del modelo de Tareas
+model Task {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  description String?
+  state     String
+  assignedUsers String[]
+  project   Project?  @relation(fields: [projectId], references: [id])
+  projectId String?   @map("project_id") @db.ObjectId  
+  startDate   DateTime?
+  endDate     DateTime?
+}

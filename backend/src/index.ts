@@ -4,14 +4,26 @@ import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
-import mongoose from 'mongoose';
 import router from './router';
 import * as dotenv from 'dotenv';
+import { PrismaClient } from "@prisma/client";
 dotenv.config();
+
+export const prisma = new PrismaClient({
+    datasources: {
+        db: {
+            url: process.env.DATABASE_URL
+        }
+    }
+});
+
+prisma.$connect().then((res) => {
+    console.log("CONNECTED");
+});
 
 const app = express();
 app.use(cors({
-    credentials:true,
+    credentials: true,
 }))
 
 app.use(compression());
@@ -20,14 +32,8 @@ app.use(bodyParser.json());
 
 const server = http.createServer(app);
 
-server.listen(8080,()=>{
+server.listen(8080, () => {
     console.log('Server running on http://localhost:8080/');
 })
-
-const MONGO_URL = process.env.MONGO_URL
-
-mongoose.Promise = Promise;
-mongoose.connect(MONGO_URL);
-mongoose.connection.on('error', (error: Error) => console.log(error));
 
 app.use('/', router());
