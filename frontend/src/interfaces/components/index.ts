@@ -16,6 +16,13 @@ interface Project {
     description: string;
     startDate: Date;
     endDate: Date;
-  }
+}
 
-export type { ComponentInputProps, CheckboxInputProps, Project }
+interface Task {
+    id: string;
+    name: string;
+    description: string;
+    state: string;
+}
+
+export type { ComponentInputProps, CheckboxInputProps, Project, Task }
