@@ -2,16 +2,30 @@ import React, { useEffect, useState } from "react";
 import "./Landing.css";
 import { getAllProjects } from "../../../utils/axios";
 import { Button } from "@mui/material";
+import axios from "axios";
 import CreateProjectComponent from "../../modals/CreateProject";
+import EditProjectComponent from "../../modals/EditProject";
+import { Project } from "../../../interfaces/components";
 import { useNavigate } from "react-router-dom";
 
 const LandingComponent: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [projectInfo, setProjectInfo] = useState({ id: "", name: "", description: "", startDate: new Date("2020-09-12"), endDate: new Date("2020-09-12") });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
+  };
+
+  const deleteProject = async (id: string) => {
+    try {
+      await axios.delete(`http://localhost:8080/project/${id}`);
+      alert('Proyecto borrado con éxito.');
+      // Aquí puedes hacer algo adicional, como cerrar el modal o redirigir a otra página si es necesario.
+    } catch (error) {
+      alert('Error al borrar el proyecto.');
+    }
   };
   const navigateTo = useNavigate();
 
@@ -30,15 +44,7 @@ const LandingComponent: React.FC = () => {
     };
 
     fetchData();
-  }, []);
-
-  interface Project {
-    id: string;
-    name: string;
-    description: string;
-    startDate: Date;
-    endDate: Date;
-  }
+  }, [isModalOpen, projects]);
 
   return (
     <>
@@ -87,59 +93,24 @@ const LandingComponent: React.FC = () => {
                     </div>
                   </div>
 
-                  <div className="card-time">{project.description}hrs</div>
+                  <div className="card-time">{project.description}</div>
                   <p className="recent">
                     Inicio: {new Date(project.startDate).toLocaleDateString()}{" "}
                     Fin: {new Date(project.startDate).toLocaleDateString()}
                   </p>
                   <div>
-                    <Button variant="contained">Edit</Button>
-
-                    <Button variant="contained" onClick={() => moveToLogin()}>Go to task</Button>
+                    <Button color="warning" variant="contained" onClick={() => { setProjectInfo({ id: project.id, name: project.name, description: project.description, startDate: project.startDate, endDate: project.endDate }); openModal() }}>Edit</Button>
+                    <Button color="error" variant="contained" onClick={() => deleteProject(project.id)}>Delete</Button>
                   </div>
+                  <Button variant="contained" onClick={() => moveToLogin()}>Ir a las Tareas</Button>
                 </div>
               </div>
             ))}
           </div>
         )}
       </div>
-
-      {/* <Modal
-        open={isModalOpen}
-        onClose={closeModal}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Crear Proyecto
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            <form>
-              <TextField
-                label="Project Name"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-              />
-              <TextField
-                label="Description"
-                variant="outlined"
-                fullWidth
-                margin="normal"
-                multiline
-                rows={4}
-              />
-              <Button variant="contained" color="primary" type="submit">
-                Create
-              </Button>
-            </form>
-          </Typography>
-        </Box>
-      </Modal> */}
-
-      {/* Renderiza el componente del modal con la variable isModalOpen */}
-      <CreateProjectComponent isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      
+      {projectInfo.name ? <EditProjectComponent setProjectInfo={setProjectInfo} Project={projectInfo} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> : <CreateProjectComponent isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
     </>
   );
 };
