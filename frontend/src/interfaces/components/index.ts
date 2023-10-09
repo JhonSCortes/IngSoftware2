@@ -10,4 +10,12 @@ interface CheckboxInputProps {
     inputController: null | ((type: string, value: string) => void)
 }
 
-export type { ComponentInputProps, CheckboxInputProps }
+interface Project {
+    id: string;
+    name: string;
+    description: string;
+    startDate: Date;
+    endDate: Date;
+  }
+
+export type { ComponentInputProps, CheckboxInputProps, Project }

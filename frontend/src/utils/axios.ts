@@ -64,16 +64,6 @@ const getProjectById = async (projectId: string) => {
   }
 };
 
-/* // Update a project by ID (authentication required)
-  const updateProject = async (projectId: string, projectData: any) => {
-    try {
-      const res = await axios.put(`${BaseBackendURI}/project/${projectId}`, projectData);
-      return res.data;
-    } catch (_) {
-      return null;
-    }
-  } */
-
 export {
   sendRegisterForm,
   sendLoginForm,
