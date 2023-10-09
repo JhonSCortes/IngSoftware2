@@ -11,7 +11,13 @@ import { useNavigate } from "react-router-dom";
 const LandingComponent: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [projectInfo, setProjectInfo] = useState({ id: "", name: "", description: "", startDate: new Date("2020-09-12"), endDate: new Date("2020-09-12") });
+  const [projectInfo, setProjectInfo] = useState({
+    id: "",
+    name: "",
+    description: "",
+    startDate: new Date("2020-09-12"),
+    endDate: new Date("2020-09-12"),
+  });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
@@ -21,23 +27,27 @@ const LandingComponent: React.FC = () => {
   const deleteProject = async (id: string) => {
     try {
       await axios.delete(`http://localhost:8080/project/${id}`);
-      alert('Proyecto borrado con éxito.');
-      // Aquí puedes hacer algo adicional, como cerrar el modal o redirigir a otra página si es necesario.
+      alert("Proyecto borrado con éxito.");
+
+      setIsModalOpen(false);
+      const data = await getAllProjects();
+      if (data) {
+        setProjects(data);
+      }
     } catch (error) {
-      alert('Error al borrar el proyecto.');
+      alert("Error al borrar el proyecto.");
     }
   };
   const navigateTo = useNavigate();
 
-    function moveToLogin() {
-        navigateTo('/tasks');
-    }
+  function moveToLogin() {
+    navigateTo("/tasks");
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await getAllProjects();
       if (data) {
-        console.log(data);
         setProjects(data);
       }
       setIsLoading(false);
@@ -99,18 +109,53 @@ const LandingComponent: React.FC = () => {
                     Fin: {new Date(project.startDate).toLocaleDateString()}
                   </p>
                   <div>
-                    <Button color="warning" variant="contained" onClick={() => { setProjectInfo({ id: project.id, name: project.name, description: project.description, startDate: project.startDate, endDate: project.endDate }); openModal() }}>Edit</Button>
-                    <Button color="error" variant="contained" onClick={() => deleteProject(project.id)}>Delete</Button>
+                    <Button
+                      color="warning"
+                      variant="contained"
+                      onClick={() => {
+                        setProjectInfo({
+                          id: project.id,
+                          name: project.name,
+                          description: project.description,
+                          startDate: project.startDate,
+                          endDate: project.endDate,
+                        });
+                        openModal();
+                      }}
+                    >
+                      Edit
+                    </Button>
+                    <Button
+                      color="error"
+                      variant="contained"
+                      onClick={() => deleteProject(project.id)}
+                    >
+                      Delete
+                    </Button>
                   </div>
-                  <Button variant="contained" onClick={() => moveToLogin()}>Ir a las Tareas</Button>
+                  <Button variant="contained" onClick={() => moveToLogin()}>
+                    Ir a las Tareas
+                  </Button>
                 </div>
               </div>
             ))}
           </div>
         )}
       </div>
-      
-      {projectInfo.name ? <EditProjectComponent setProjectInfo={setProjectInfo} Project={projectInfo} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> : <CreateProjectComponent isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />}
+
+      {projectInfo.name ? (
+        <EditProjectComponent
+          setProjectInfo={setProjectInfo}
+          Project={projectInfo}
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+      ) : (
+        <CreateProjectComponent
+          isModalOpen={isModalOpen}
+          setIsModalOpen={setIsModalOpen}
+        />
+      )}
     </>
   );
 };

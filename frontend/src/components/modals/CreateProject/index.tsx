@@ -1,6 +1,8 @@
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { getAllProjects } from "../../../utils/axios";
+import { Project } from "../../../interfaces/components";
 
 interface CreateProjectComponentProps {
   isModalOpen: boolean;
@@ -11,13 +13,17 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
   isModalOpen,
   setIsModalOpen,
 }) => {
+  
+  const [projects, setProjects] = useState<Project[]>([]);
   const [formData, setFormData] = useState({
-    name: '',
-    description: '',
-    ownerId: '',
+    name: "",
+    description: "",
+    ownerId: "651f483e2afedc3b83cf39a6",
   });
 
-  const handleFormChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleFormChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -28,11 +34,17 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/project', formData);
-      alert('Proyecto creado con éxito.');
-      // Aquí puedes hacer algo adicional, como cerrar el modal o redirigir a otra página si es necesario.
+      await axios.post("http://localhost:8080/project", formData);
+      alert("Proyecto creado con éxito.");
+
+      setIsModalOpen(false);
+      const data = await getAllProjects();
+      if (data) {
+        console.log(data);
+        setProjects(data);
+      }
     } catch (error) {
-      alert('Error al crear el proyecto.');
+      alert("Error al crear el proyecto.");
     }
   };
 
@@ -85,7 +97,7 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
               value={formData.description}
               onChange={handleFormChange}
             />
-            <TextField
+            {/* <TextField
               label="Owner ID"
               variant="outlined"
               fullWidth
@@ -93,7 +105,8 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
               name="ownerId"
               value={formData.ownerId}
               onChange={handleFormChange}
-            />{/* 
+            /> */}
+            {/* 
               <TextField
                 variant="outlined"
                 fullWidth

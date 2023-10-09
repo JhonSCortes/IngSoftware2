@@ -26,8 +26,8 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
     description: "",
     state: "",
     assignedUsers: "",
-    startDate: "",
-    endDate: "",
+    startDate: "2022-01-01T00:00:00Z",
+    endDate: "2023-01-01T00:00:00Z",
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -130,7 +130,6 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
               margin="normal"
               type="date"
               name="startDate"
-              value={formData.startDate}
               onChange={handleFormChange}
             />
             <TextField
@@ -139,7 +138,6 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
               margin="normal"
               type="date"
               name="endDate"
-              value={formData.endDate}
               onChange={handleFormChange}
             />
             <Button variant="contained" color="primary" type="submit">

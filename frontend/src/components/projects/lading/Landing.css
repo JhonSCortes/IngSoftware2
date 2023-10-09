@@ -20,7 +20,22 @@
   gap: 20px; /* Adjust the gap between columns as needed */
   padding-left: 2.5rem;
 }
+@media (max-width: 768px) {
+  .project-list {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
+@media (max-width: 1024px) {
+  .project-list {
+    grid-template-columns: repeat(2, 1fr); 
+  }
+}
 
+@media (max-width: 1444px) {
+  .project-list {
+    grid-template-columns: repeat(3, 1fr); 
+  }
+}
 .project {
   border: 1px solid #ccc;
   padding: 20px;

@@ -3,6 +3,7 @@ import "./TaskLanding.css";
 import { getAllTasks } from "../../../utils/axios";
 import { Button } from "@mui/material";
 import CreateTaskComponent from "../../modals/CreateTask/CreateTask";
+import axios from "axios";
 
 const TaskLandingComponent: React.FC = () => {
   const [tasks, setProjects] = useState<Task[]>([]);
@@ -17,7 +18,6 @@ const TaskLandingComponent: React.FC = () => {
     const fetchData = async () => {
       const data = await getAllTasks();
       if (data) {
-        console.log(data);
         setProjects(data);
       }
       setIsLoading(false);
@@ -25,6 +25,21 @@ const TaskLandingComponent: React.FC = () => {
 
     fetchData();
   }, []);
+
+  const deleteTask = async (id: string) => {
+    try {
+      await axios.delete(`http://localhost:8080/tasks/${id}`);
+      alert("Tarea borrado con éxito.");
+
+      setIsModalOpen(false);
+      const data = await getAllTasks();
+      if (data) {
+        setProjects(data);
+      }
+    } catch (error) {
+      alert("Error al borrar la Tarea.");
+    }
+  };
 
   interface Task {
     id: string;
@@ -80,12 +95,17 @@ const TaskLandingComponent: React.FC = () => {
                     </p>
                   </div>
                   <div className="footer">
-                    <p className="tag">{task.state.toLocaleUpperCase()}</p>
+                    <p className="tag">{task.state}</p>
 
                     <Button variant="contained">Editar</Button>
 
-                    <Button variant="outlined" color="error">
-                      Borrar
+                    
+                    <Button
+                      color="error"
+                      variant="contained"
+                      onClick={() => deleteTask(task.id)}
+                    >
+                      Delete
                     </Button>
                   </div>
                 </div>
