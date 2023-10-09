@@ -24,14 +24,12 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
   const [formData, setFormData] = useState({
     name: "",
     description: "",
-    state: "",
-    assignedUsers: "",
-    startDate: "2022-01-01T00:00:00Z",
-    endDate: "2023-01-01T00:00:00Z",
+    state: "pendiente",
+    assignedUsers: ["myself"],
+    startDate: new Date("08/10/2023"),
+    endDate: new Date("08/14/2023"),
+    projectId: "651f49213ae83530883aa56b",
   });
-  const [errorMessage, setErrorMessage] = useState("");
-  const [successMessage, setSuccessMessage] = useState("");
-
   const [state, setState] = useState("");
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -52,10 +50,10 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
     e.preventDefault();
     try {
       await axios.post('http://localhost:8080/tasks', formData);
-      setSuccessMessage("Tarea creado con éxito.");
-      // Aquí puedes hacer algo adicional, como cerrar el modal o redirigir a otra página si es necesario.
+      alert("Tarea creado con éxito.");      
+      setIsModalOpen(false);
     } catch (error) {
-      setErrorMessage("Error al crear la Tarea.");
+      alert("Error al crear la Tarea.");
     }
   };
 
@@ -122,34 +120,23 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
               <MenuItem value={"Activa"}>Retrasada</MenuItem>
               <MenuItem value={"Pendiente"}>Pendiente</MenuItem>
               <MenuItem value={"Terminada"}>Terminada</MenuItem>
-            </Select>
-
+            </Select>{/* 
             <TextField
+              label="Project ID"
               variant="outlined"
               fullWidth
               margin="normal"
-              type="date"
-              name="startDate"
+              name="projectId"
+              value={formData.projectId}
               onChange={handleFormChange}
-            />
-            <TextField
-              variant="outlined"
-              fullWidth
-              margin="normal"
-              type="date"
-              name="endDate"
-              onChange={handleFormChange}
-            />
+            /> */}
+            <br></br>
             <Button variant="contained" color="primary" type="submit">
               Create
             </Button>
           </form>
-          {errorMessage && <div>Error: {errorMessage}</div>}
-          {successMessage && <div>Éxito: {successMessage}</div>}
         </Box>
       </Modal>
-
-      <></>
     </>
   );
 };
