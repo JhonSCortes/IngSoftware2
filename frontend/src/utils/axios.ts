@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ProjectPayload, loginPayload, registerPayload } from "../interfaces/utils";
+import { ProjectPayload, TaskPayload, loginPayload, registerPayload } from "../interfaces/utils";
 
 const BaseBackendURI = import.meta.env.VITE_BASE_API_URI;
 
@@ -74,10 +74,39 @@ const getProjectById = async (projectId: string) => {
     }
   } */
 
+// Get all projects (authentication required)
+const getAllTasks = async () => {
+  try {
+    const res = await axios.get(`${BaseBackendURI}/task`);
+    return res.data;
+  } catch (_) {
+    return null;
+  }
+};
+
+// Create a new project
+const createTask = async (payload: TaskPayload): Promise<string | null> => {
+  try {
+    const res = await axios.post(BaseBackendURI + "/auth/tasks", {
+      name: payload.name,
+      description: payload.description,
+      state: payload.state,
+      startDate: payload.startDate,
+      endDate: payload.endDate,
+    });
+    return res.data;
+  } catch (_) {
+    return null;
+  }
+};
+
+
 export {
   sendRegisterForm,
   sendLoginForm,
   getAllProjects,
   createProject,
   getProjectById,
+  getAllTasks,
+  createTask,
 };

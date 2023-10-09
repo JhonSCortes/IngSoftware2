@@ -3,6 +3,7 @@ import "./Landing.css";
 import { getAllProjects } from "../../../utils/axios";
 import { Button } from "@mui/material";
 import CreateProjectComponent from "../../modals/CreateProject";
+import { useNavigate } from "react-router-dom";
 
 const LandingComponent: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -12,6 +13,11 @@ const LandingComponent: React.FC = () => {
   const openModal = () => {
     setIsModalOpen(true);
   };
+  const navigateTo = useNavigate();
+
+    function moveToLogin() {
+        navigateTo('/tasks');
+    }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -38,7 +44,7 @@ const LandingComponent: React.FC = () => {
     <>
       <div className="layout">
         <div className="header">
-          <h1 className="title">Mis Proyectos</h1>
+          <h1 className="Htitle">Mis Proyectos</h1>
         </div>
 
         <div className="actions">
@@ -89,7 +95,7 @@ const LandingComponent: React.FC = () => {
                   <div>
                     <Button variant="contained">Edit</Button>
 
-                    <Button variant="contained">Go to task</Button>
+                    <Button variant="contained" onClick={() => moveToLogin()}>Go to task</Button>
                   </div>
                 </div>
               </div>

@@ -4,6 +4,7 @@ import DeniedModal from './components/modals/DeniedModal';
 import PrivateRoutes from './components/auth/PrivateRoutes';
 import './App.css';
 import { ProjectsRoutes } from './routes/ProjectRoutes';
+import { TaskRoutes } from './routes/TaskRoutes';
 
 // The app function will show and configure all SPA routes.
 function App() {
@@ -19,6 +20,8 @@ function App() {
           </PrivateRoutes>
         } />
         <Route path='/*' element={ <DeniedModal errorText='Error 404: Page not found...' /> } />
+        
+        <Route path='tasks/*' element= { <TaskRoutes />} />
       </Routes>
     </>
   )

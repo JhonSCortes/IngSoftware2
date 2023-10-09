@@ -15,5 +15,14 @@ interface ProjectPayload {
     endDate: string,
 }
 
+interface TaskPayload {
+    name: string,
+    description: string,
+    state: string,
+    startDate: string,
+    endDate: string,
+}
 
-export type {loginPayload, registerPayload, ProjectPayload};
+
+
+export type {loginPayload, registerPayload, ProjectPayload, TaskPayload};
