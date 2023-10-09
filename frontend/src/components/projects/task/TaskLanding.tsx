@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import "./TaskLanding.css";
 import { getAllTasks } from "../../../utils/axios";
 import { Button } from "@mui/material";
+import EditTaskComponent from "../../modals/EditTask";
 import CreateTaskComponent from "../../modals/CreateTask/CreateTask";
 
 const TaskLandingComponent: React.FC = () => {
   const [tasks, setProjects] = useState<Task[]>([]);
+  const [taskInfo, setTaskInfo] = useState({id: "", name: "", description: "", state: "" });
   const [isLoading, setIsLoading] = useState(true);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -24,7 +26,7 @@ const TaskLandingComponent: React.FC = () => {
     };
 
     fetchData();
-  }, []);
+  }, [isModalOpen, tasks]);
 
   interface Task {
     id: string;
@@ -66,8 +68,8 @@ const TaskLandingComponent: React.FC = () => {
                       task.state === "pendiente"
                         ? "retrasada"
                         : task.state === "terminada"
-                        ? "terminada"
-                        : "headerCard"
+                          ? "terminada"
+                          : "headerCard"
                     }
                   />
                   <div className="info">
@@ -82,7 +84,7 @@ const TaskLandingComponent: React.FC = () => {
                   <div className="footer">
                     <p className="tag">{task.state.toLocaleUpperCase()}</p>
 
-                    <Button variant="contained">Editar</Button>
+                    <Button onClick={() => { setTaskInfo({id: task.id, name: task.name, description: task.description, state: task.state }); openModal() }} variant="contained">Editar</Button>
 
                     <Button variant="outlined" color="error">
                       Borrar
@@ -96,10 +98,8 @@ const TaskLandingComponent: React.FC = () => {
       </div>
 
       {/* Renderiza el componente del modal con la variable isModalOpen */}
-      <CreateTaskComponent
-        isModalOpen={isModalOpen}
-        setIsModalOpen={setIsModalOpen}
-      />
+      {taskInfo.name ? <EditTaskComponent Task={taskInfo} setTask={setTaskInfo} isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} /> : <CreateTaskComponent isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}
+      />}
     </>
   );
 };
