@@ -1,3 +1,4 @@
+import { DatePicker, LocalizationProvider } from "@mui/lab";
 import {
   Box,
   Button,
@@ -11,15 +12,18 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface CreateProjectComponentProps {
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  ProjectId: string;
 }
 
 const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
   isModalOpen,
   setIsModalOpen,
+  ProjectId
 }) => {
   const [formData, setFormData] = useState({
     name: "",
@@ -28,7 +32,7 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
     assignedUsers: ["myself"],
     startDate: new Date("08/10/2023"),
     endDate: new Date("08/14/2023"),
-    projectId: "651f49213ae83530883aa56b",
+    projectId: ProjectId,
   });
   const [state, setState] = useState("");
 
@@ -45,15 +49,30 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
       [name]: value,
     });
   };
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:8080/tasks', formData);
-      alert("Tarea creado con éxito.");      
+      const formattedData = {
+        ...formData,
+        startDate: formData.startDate.toISOString(),
+        endDate: formData.endDate.toISOString(),
+      };
+      await axios.post('http://localhost:8080/tasks', formattedData);
+      /* toast.success('🦄 Wow so easy!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });     */ 
       setIsModalOpen(false);
-    } catch (error) {
-      alert("Error al crear la Tarea.");
+    } catch (error) {/* 
+      toast.error("Error al crear la Tarea."); */
     }
   };
 
@@ -130,6 +149,7 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
               value={formData.projectId}
               onChange={handleFormChange}
             /> */}
+            <p>adsfasg</p>
             <br></br>
             <Button variant="contained" color="primary" type="submit">
               Create

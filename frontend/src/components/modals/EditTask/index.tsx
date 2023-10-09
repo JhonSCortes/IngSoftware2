@@ -1,4 +1,5 @@
 import {
+    Alert,
     Box,
     Button,
     InputLabel,
@@ -18,20 +19,22 @@ interface EditTaskComponentProps {
     setTask: React.Dispatch<React.SetStateAction<Task>>;
     isModalOpen: boolean;
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    ProjectId: string;
 }
 
 const EditTaskComponent: React.FC<EditTaskComponentProps> = ({
     isModalOpen,
     setIsModalOpen,
     Task,
-    setTask
+    setTask,
+    ProjectId
 }) => {
     const [formData, setFormData] = useState({
         ...Task,
         assignedUsers: ["myself"],
         startDate: new Date("08/10/2023"),
         endDate: new Date("08/14/2023"),
-        projectId: "651f49213ae83530883aa56b",
+        projectId: ProjectId,
     });
     const [state, setState] = useState("");
 
@@ -54,7 +57,7 @@ const EditTaskComponent: React.FC<EditTaskComponentProps> = ({
         try {
             await axios.patch(`http://localhost:8080/tasks/${Task.id}`, formData);
             alert("Tarea Acutlizada con éxito.");
-            // Aquí puedes hacer algo adicional, como cerrar el modal o redirigir a otra página si es necesario.
+            setIsModalOpen(false)   
         } catch (error) {
             alert("Error al Acutlizada la Tarea.");
         }
@@ -139,7 +142,7 @@ const EditTaskComponent: React.FC<EditTaskComponentProps> = ({
                             Save
                         </Button>
                     </form>
-                </Box>
+                </Box>                
             </Modal>
         </>
     );

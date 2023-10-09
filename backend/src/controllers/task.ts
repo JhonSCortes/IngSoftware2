@@ -3,6 +3,7 @@ import {
   deleteTask,
   getAllTasks,
   getTaskById,
+  getTasksByProjectId,
   updateTaskRecord,
 } from "../actions/task";
 import express from "express";
@@ -59,6 +60,19 @@ export const getAllTask = async (
   }
 };
 
+export const getAllTaskByProject = async (req: express.Request, res: express.Response) => {
+  try {
+    const { id } = req.params;
+    const tasks = await getTasksByProjectId(id);
+
+    return res.status(200).json(tasks);
+  } catch (error) {
+    console.log(error);
+    return res
+      .status(500)
+      .json({ error: "Se produjo un error interno en el servidor:\n" + error });
+  }
+};
 export const GetTask = async (req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params;

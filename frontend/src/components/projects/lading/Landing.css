@@ -1,8 +1,8 @@
 .layout {
-  width: 99vw;
-  height: 98vh;
-  border: 2px ;
-  border-radius: 15px;
+  min-width: 100vw;
+  min-height: 900px;
+  width: auto;
+  height: auto;
   background: white;
 }
 
@@ -12,12 +12,13 @@
 
 .Htitle{
     font-size: 50px;
+    color: black;
 }
 
 .project-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* Creates 4 equally-sized columns */
-  gap: 20px; /* Adjust the gap between columns as needed */
+  gap: 10px; /* Adjust the gap between columns as needed */
   padding-left: 2.5rem;
 }
 @media (max-width: 768px) {
@@ -133,6 +134,7 @@
   padding: 12px;
   border-radius: 12px;
   border: 1.5px solid lightgrey;
+  background: white;
   outline: none;
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
   box-shadow: 0px 0px 20px -18px;

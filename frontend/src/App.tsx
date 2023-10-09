@@ -5,6 +5,7 @@ import PrivateRoutes from './components/auth/PrivateRoutes';
 import './App.css';
 import { ProjectsRoutes } from './routes/ProjectRoutes';
 import { TaskRoutes } from './routes/TaskRoutes';
+import { ToastContainer } from 'react-toastify';
 
 // The app function will show and configure all SPA routes.
 function App() {
@@ -21,7 +22,7 @@ function App() {
         } />
         <Route path='/*' element={ <DeniedModal errorText='Error 404: Page not found...' /> } />
         
-        <Route path='tasks/*' element= { <TaskRoutes />} />
+        <Route path='tasks/:id' element= { <TaskRoutes />} />
       </Routes>
     </>
   )
