@@ -40,8 +40,8 @@ const LandingComponent: React.FC = () => {
   };
   const navigateTo = useNavigate();
 
-  function moveToLogin() {
-    navigateTo("/tasks");
+  function moveToTaks(id: string) {
+    navigateTo(`/tasks/${id}`);
   }
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const LandingComponent: React.FC = () => {
         </div>
 
         {isLoading ? (
-          <p>Loading...</p>
+          <p className="title">Loading...</p>
         ) : (
           <div className="project-list">
             {projects.map((project) => (
@@ -133,7 +133,7 @@ const LandingComponent: React.FC = () => {
                       Delete
                     </Button>
                   </div>
-                  <Button variant="contained" onClick={() => moveToLogin()}>
+                  <Button variant="contained" onClick={() => moveToTaks(project.id)}>
                     Ir a las Tareas
                   </Button>
                 </div>

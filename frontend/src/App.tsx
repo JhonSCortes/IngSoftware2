@@ -21,7 +21,7 @@ function App() {
         } />
         <Route path='/*' element={ <DeniedModal errorText='Error 404: Page not found...' /> } />
         
-        <Route path='tasks/*' element= { <TaskRoutes />} />
+        <Route path='tasks/:id' element= { <TaskRoutes />} />
       </Routes>
     </>
   )
