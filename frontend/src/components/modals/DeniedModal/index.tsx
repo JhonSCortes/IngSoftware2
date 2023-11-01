@@ -1,4 +1,4 @@
-import './DeniedModal.css';
+import './deniedModal.css';
 import { useNavigate } from 'react-router-dom';
 
 interface Props {
