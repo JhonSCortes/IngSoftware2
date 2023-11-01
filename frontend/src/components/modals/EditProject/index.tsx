@@ -19,7 +19,7 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
 }) => {
   const [formData, setFormData] = useState({ ...Project, ownerId: "651f483e2afedc3b83cf39a6" });
 
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [, setProjects] = useState<Project[]>([]);
   
   const handleFormChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

@@ -1,0 +1,33 @@
+name: Build Check
+
+on:
+  push:
+    branches:
+      - feature-git-action
+      - feature
+  pull_request:
+    branches:
+      - main
+      - feature
+      - develop
+
+jobs:
+  build-check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Repo
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: "14"  
+
+      - name: Install Dependencies
+        run: npm install
+        working-directory: ./frontend
+
+      - name: Build
+        run: npm run build
+        working-directory: ./frontend
