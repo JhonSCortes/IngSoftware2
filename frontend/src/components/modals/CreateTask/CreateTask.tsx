@@ -1,4 +1,3 @@
-import { DatePicker, LocalizationProvider } from "@mui/lab";
 import {
   Box,
   Button,
@@ -12,7 +11,6 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 interface CreateProjectComponentProps {
   isModalOpen: boolean;

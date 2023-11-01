@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./TaskLanding.css";
 import { getAllTasks } from "../../../utils/axios";
-import { Alert, Button } from "@mui/material";
+import { Button } from "@mui/material";
 import EditTaskComponent from "../../modals/EditTask";
 import CreateTaskComponent from "../../modals/CreateTask/CreateTask";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 
 const TaskLandingComponent: React.FC = () => {
   const [tasks, setProjects] = useState<Task[]>([]);
@@ -18,7 +17,7 @@ const TaskLandingComponent: React.FC = () => {
   });
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams<{ id: string }>();
-  const [projectId, setProjectId] = useState("651f49213ae83530883aa56b");
+  const [projectId] = useState("651f49213ae83530883aa56b");
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {

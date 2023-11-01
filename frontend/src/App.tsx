@@ -5,7 +5,6 @@ import PrivateRoutes from './components/auth/PrivateRoutes';
 import './App.css';
 import { ProjectsRoutes } from './routes/ProjectRoutes';
 import { TaskRoutes } from './routes/TaskRoutes';
-import { ToastContainer } from 'react-toastify';
 
 // The app function will show and configure all SPA routes.
 function App() {
