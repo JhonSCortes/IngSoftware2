@@ -14,7 +14,7 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
   setIsModalOpen,
 }) => {
   
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [, setProjects] = useState<Project[]>([]);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
