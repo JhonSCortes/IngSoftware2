@@ -75,9 +75,9 @@ const getProjectById = async (projectId: string) => {
   } */
 
 // Get all projects (authentication required)
-const getAllTasks = async () => {
+const getAllTasks = async (id: string) => {
   try {
-    const res = await axios.get(`${BaseBackendURI}/task`);
+    const res = await axios.get(`${BaseBackendURI}/project/tasks/${id}`);
     return res.data;
   } catch (_) {
     return null;
