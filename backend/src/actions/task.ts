@@ -1,4 +1,4 @@
-import { prisma } from "../index";
+import { prisma } from "../db";
 import { Task, TaskToBeCreated } from "interfaces/task";
 
 // Acción para obtener todas las tareas de un proyecto

@@ -1,4 +1,4 @@
-import { prisma } from "../index";
+import { prisma } from "../db";
 import { Project, ProjectToBeCreated } from "interfaces/projects";
 // Acción para obtener todos los proyectos
 export const getProjects = () =>
