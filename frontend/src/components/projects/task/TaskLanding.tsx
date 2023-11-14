@@ -7,7 +7,6 @@ import CreateTaskComponent from "../../modals/CreateTask/CreateTask";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../../Loader/Loader";
-import { useParams } from "react-router-dom";
 
 const TaskLandingComponent: React.FC = () => {
   const [tasks, setProjects] = useState<Task[]>([]);
