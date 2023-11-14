@@ -57,7 +57,6 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
         startDate: formData.startDate.toISOString(),
         endDate: formData.endDate.toISOString(),
       };
-      
       const BaseBackendURI = import.meta.env.VITE_BASE_API_URI;
       await axios.post(`${BaseBackendURI}/tasks`, formattedData);
       /* toast.success('🦄 Wow so easy!', {
@@ -149,6 +148,7 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
               value={formData.projectId}
               onChange={handleFormChange}
             /> */}
+            <p>adsfasg</p>
             <br></br>
             <Button variant="contained" color="primary" type="submit">
               Create
