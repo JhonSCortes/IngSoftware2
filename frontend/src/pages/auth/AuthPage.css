@@ -11,6 +11,12 @@
   text-align: left;
 }
 
+@media (max-width: 955px) {
+  .left-side-component {
+    width: 100%;
+  }
+}
+
 .auth_body {
   padding: 3em 5em;
   text-align: center;

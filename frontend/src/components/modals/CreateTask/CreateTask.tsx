@@ -1,4 +1,3 @@
-import { DatePicker, LocalizationProvider } from "@mui/lab";
 import {
   Box,
   Button,
@@ -12,7 +11,6 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
-import { toast } from "react-toastify";
 
 interface CreateProjectComponentProps {
   isModalOpen: boolean;
@@ -59,7 +57,9 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
         startDate: formData.startDate.toISOString(),
         endDate: formData.endDate.toISOString(),
       };
-      await axios.post('http://localhost:8080/tasks', formattedData);
+      
+      const BaseBackendURI = import.meta.env.VITE_BASE_API_URI;
+      await axios.post(`${BaseBackendURI}/tasks`, formattedData);
       /* toast.success('🦄 Wow so easy!', {
         position: "bottom-right",
         autoClose: 5000,
@@ -149,7 +149,6 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
               value={formData.projectId}
               onChange={handleFormChange}
             /> */}
-            <p>adsfasg</p>
             <br></br>
             <Button variant="contained" color="primary" type="submit">
               Create
