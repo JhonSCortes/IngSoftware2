@@ -7,6 +7,12 @@
   margin: auto;
 }
 
+@media (max-width: 955px) {
+  .right-side-component {
+    display: none;
+    border: 2px red solid;
+  }
+}
 .right-text-div {
   display: flex;
   flex-direction: column;

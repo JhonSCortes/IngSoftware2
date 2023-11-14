@@ -1,6 +1,7 @@
 import {
   createTask,
   deleteTask,
+  getAllTaskByName,
   getAllTasks,
   getTaskById,
   getTasksByProjectId,
@@ -131,5 +132,23 @@ export const updateTaskMethod = async (
     return res
       .status(500)
       .json({ error: "Se produjo un error interno en el servidor:\n" + error });
+  }
+};
+
+export const getAllTasksByname = async (req: express.Request, res: express.Response) => {
+  try {
+
+    const { projectId, name } = req.query as { projectId?: string; name?: string };
+
+    if (!projectId || !name) {
+      return res.status(400).json({ error: "Faltan datos obligatorios" });
+    }
+
+    const tasks = await getAllTaskByName(projectId, name);
+
+    return res.status(200).json(tasks);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: 'Se produjo un error interno en el servidor:\n' +error });
   }
 };
