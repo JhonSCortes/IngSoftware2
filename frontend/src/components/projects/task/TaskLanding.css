@@ -1,5 +1,6 @@
 .taskContainer {
   padding-left: 3.5rem;
+  display: contents;
 }
 .cardTask {
   display: flex;

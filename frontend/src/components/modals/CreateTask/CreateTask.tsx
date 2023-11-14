@@ -57,7 +57,8 @@ const CreateTaskComponent: React.FC<CreateProjectComponentProps> = ({
         startDate: formData.startDate.toISOString(),
         endDate: formData.endDate.toISOString(),
       };
-      await axios.post('http://localhost:8080/tasks', formattedData);
+      const BaseBackendURI = import.meta.env.VITE_BASE_API_URI;
+      await axios.post(`${BaseBackendURI}/tasks`, formattedData);
       /* toast.success('🦄 Wow so easy!', {
         position: "bottom-right",
         autoClose: 5000,

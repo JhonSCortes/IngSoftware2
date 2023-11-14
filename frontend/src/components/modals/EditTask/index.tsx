@@ -53,8 +53,9 @@ const EditTaskComponent: React.FC<EditTaskComponentProps> = ({
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        try {
-            await axios.patch(`http://localhost:8080/tasks/${Task.id}`, formData);
+        try {            
+            const BaseBackendURI = import.meta.env.VITE_BASE_API_URI;
+            await axios.patch(`${BaseBackendURI}/tasks/${Task.id}`, formData);
             alert("Tarea Acutlizada con éxito.");
             setIsModalOpen(false)   
         } catch (error) {

@@ -33,8 +33,9 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await axios.post("http://localhost:8080/project", formData);
+    try {      
+      const BaseBackendURI = import.meta.env.VITE_BASE_API_URI;
+      await axios.post(`${BaseBackendURI}/project`, formData);
       alert("Proyecto creado con éxito.");
 
       setIsModalOpen(false);

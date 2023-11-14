@@ -1,5 +1,5 @@
 import { prisma } from "../index";
-import { createProject, deleteProject, getProjectById, getProjects,  updateProjectRecord } from "../actions/projects";
+import { createProject, deleteProject, getAllProjectsByName, getProjectById, getProjects,  updateProjectRecord } from "../actions/projects";
 import { ProjectToBeCreated } from "interfaces/projects";
 import express from 'express';
 
@@ -99,5 +99,24 @@ export const CreateProjectMethod = async (req: express.Request, res: express.Res
       return res
         .status(500)
         .json({ error: "Se produjo un error interno en el servidor:\n" + error });
+    }
+  };
+
+  export const getAllProjectsByname = async (req: express.Request, res: express.Response) => {
+    try {
+
+      const { name } = req.query as { name?: string }; /* 
+      const { name } = req.body; */
+  
+      if (!name) {
+          return res.status(400).json({ error: "Faltan datos obligatorios" });
+      }
+
+      const projects = await getAllProjectsByName(name);
+  
+      return res.status(200).json(projects);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: 'Se produjo un error interno en el servidor:\n' +error });
     }
   };

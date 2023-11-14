@@ -7,6 +7,7 @@ import CreateProjectComponent from "../../modals/CreateProject";
 import EditProjectComponent from "../../modals/EditProject";
 import { Project } from "../../../interfaces/components";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../Loader/Loader";
 
 const LandingComponent: React.FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -18,7 +19,7 @@ const LandingComponent: React.FC = () => {
     startDate: new Date("2020-09-12"),
     endDate: new Date("2020-09-12"),
   });
-
+  const [searchQuery, setSearchQuery] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => {
     setIsModalOpen(true);
@@ -46,15 +47,45 @@ const LandingComponent: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await getAllProjects();
-      if (data) {
-        setProjects(data);
+      setIsLoading(true);
+      try {
+        if (!searchQuery) {
+          const data = await getAllProjects();
+          if (data) {
+            setProjects(data);
+          }
+        } else {
+          await handleSearch();
+        }
+      } catch (error) {
+        // Manejar errores, por ejemplo, mostrar un mensaje de error.
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     fetchData();
-  }, [isModalOpen, projects]);
+  }, [ searchQuery]);
+
+  const handleSearch = async () => {
+    const BaseBackendURI = import.meta.env.VITE_BASE_API_URI;
+    try {
+      const response = await axios.get(`${BaseBackendURI}/projects`, {
+        params: { name: searchQuery },
+      });
+
+      if (response.status >= 200 && response.status < 300) {
+        const data = response.data;
+      setProjects(data);
+        console.log("Proyectos obtenidos con éxito.");
+      } else {
+        console.log("Error al obtener proyectos.");
+      }
+    } catch (error) {
+      console.log("Error al obtener proyectos. Detalles: " + error);
+    }
+  };
 
   return (
     <>
@@ -68,14 +99,21 @@ const LandingComponent: React.FC = () => {
             type="text"
             placeholder="Buscar en tus Proyectos..."
             className="input"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
           />
+
+          <Button variant="outlined" onClick={handleSearch}>
+            Buscar
+          </Button>
+
           <Button variant="outlined" onClick={openModal}>
-            Create
+            Crear
           </Button>
         </div>
 
         {isLoading ? (
-          <p className="title">Loading...</p>
+          <Loader />
         ) : (
           <div className="project-list">
             {projects.map((project) => (
@@ -108,7 +146,7 @@ const LandingComponent: React.FC = () => {
                     Inicio: {new Date(project.startDate).toLocaleDateString()}{" "}
                     Fin: {new Date(project.startDate).toLocaleDateString()}
                   </p>
-                  <div>
+                  <div className="cardButtons">
                     <Button
                       color="warning"
                       variant="contained"
@@ -133,7 +171,10 @@ const LandingComponent: React.FC = () => {
                       Delete
                     </Button>
                   </div>
-                  <Button variant="contained" onClick={() => moveToTaks(project.id)}>
+                  <Button
+                    variant="contained"
+                    onClick={() => moveToTaks(project.id)}
+                  >
                     Ir a las Tareas
                   </Button>
                 </div>
