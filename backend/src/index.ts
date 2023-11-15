@@ -5,17 +5,8 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
 import router from './router';
-import * as dotenv from 'dotenv';
-import { PrismaClient } from "@prisma/client";
-dotenv.config();
+import {prisma} from "./db"
 
-export const prisma = new PrismaClient({
-    datasources: {
-        db: {
-            url: process.env.DATABASE_URL
-        }
-    }
-});
 
 prisma.$connect().then((res) => {
     console.log("CONNECTED");
