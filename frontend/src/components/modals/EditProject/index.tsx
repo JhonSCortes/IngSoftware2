@@ -33,9 +33,10 @@ const CreateProjectComponent: React.FC<CreateProjectComponentProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
+    try {      
+      const BaseBackendURI = import.meta.env.VITE_BASE_API_URI;
       await axios.patch(
-        `http://localhost:8080/project/${formData.id}`,
+        `${BaseBackendURI}/project/${formData.id}`,
         formData
       );
       alert("Proyecto guardado con éxito.");

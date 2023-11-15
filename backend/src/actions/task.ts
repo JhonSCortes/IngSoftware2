@@ -8,6 +8,10 @@ export const getTasksByProjectId = (projectId: string) =>
 // Acción para obtener todas las tareas
 export const getAllTasks = () => prisma.task.findMany();
 
+//Accion para la barra de busqueda
+export const getAllTaskByName = (projectId: string, name: string) =>
+prisma.task.findMany({ where: {projectId, name: { contains: name } } });
+
 // Acción para obtener una tarea por su ID
 export const getTaskById = (id: string) =>
   prisma.task.findUnique({ where: { id } });

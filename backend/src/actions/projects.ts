@@ -30,7 +30,7 @@ export const updateProjectRecord = (
   description: string,
   ownerId: string,
   startDate: Date,
-  endDate: Date,
+  endDate: Date
 ) =>
   prisma.project.update({
     where: { id },
@@ -42,7 +42,7 @@ export const updateProjectRecord = (
       endDate: endDate,
     },
   });
-  
+
 // Acción para eliminar un proyecto por su ID
 export const deleteProject = (id: string) =>
   prisma.project.delete({ where: { id } });
@@ -50,3 +50,6 @@ export const deleteProject = (id: string) =>
 // Acción para obtener todos los proyectos de un usuario por su ID de usuario
 export const getAllProjectsByUserId = (userId: string) =>
   prisma.project.findMany({ where: { ownerId: userId } });
+
+export const getAllProjectsByName = (name: string) =>
+  prisma.project.findMany({ where: { name: { contains: name } } });

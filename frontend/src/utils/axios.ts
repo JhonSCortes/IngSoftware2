@@ -44,6 +44,18 @@ const createProject = async (payload: ProjectPayload): Promise<string | null> =>
   }
 };
 
+// Get Projects by name
+const projectsByName = async (payload: ProjectPayload): Promise<string | null> => {
+  try {
+    const res = await axios.post(BaseBackendURI + "/projects", {
+      name: payload.name,
+    });
+    return res.data;
+  } catch (_) {
+    return null;
+  }
+};
+
 // Get all projects (authentication required)
 const getAllProjects = async () => {
   try {
@@ -109,4 +121,5 @@ export {
   getProjectById,
   getAllTasks,
   createTask,
+  projectsByName,
 };
