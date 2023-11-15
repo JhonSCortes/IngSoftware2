@@ -1,4 +1,3 @@
-// En tu archivo de pruebas, antes de las importaciones de tus acciones
 jest.mock('../../../src/db', () => ({
   prisma: {
     project: {
@@ -45,6 +44,7 @@ jest.mock('../../../src/db', () => ({
 }));
 
 import { createProject, getProjects, getProjectById, updateProjectRecord, deleteProject } from '../../../src/actions/projects';
+import {describe, expect, it, beforeAll, afterEach, afterAll} from "@jest/globals";
 
 describe('Project Actions Integration Tests', () => {
   let projectId: string;

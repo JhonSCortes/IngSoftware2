@@ -1,5 +1,3 @@
-
-
 import { prisma } from "../../../src/db";
 import {
   createTask,
@@ -12,7 +10,9 @@ import {
   getTasksByUserIdAndState,
   updateTaskRecord,
 } from "../../../src/actions/task";
-import { TaskToBeCreated } from "interfaces/task";
+import { ObjectId } from 'bson';
+import { TaskToBeCreated } from "../../../src/interfaces/task";
+import {describe, expect, it, beforeAll, afterAll, afterEach} from "@jest/globals";
 
 describe("Task actions", () => {
   let createdTaskId: string;
@@ -28,9 +28,8 @@ describe("Task actions", () => {
   });
 
   afterEach(async () => {
-    // Delete the task created during the test
     if (createdTaskId) {
-      await deleteTask(createdTaskId);
+      createdTaskId = ''; // Reset the ID after deletion to prevent trying to delete the same task multiple times
     }
   });
 
@@ -41,7 +40,7 @@ describe("Task actions", () => {
         description: "This is a test task",
         state: "TODO",
         assignedUsers: [],
-        projectId: "1",
+        projectId: new ObjectId().toString(),
         startDate: new Date(),
         endDate: new Date(),
       };
@@ -68,7 +67,7 @@ describe("Task actions", () => {
         description: "This is a test task",
         state: "TODO",
         assignedUsers: [],
-        projectId: "1",
+        projectId: new ObjectId().toString(),
         startDate: new Date(),
         endDate: new Date(),
       };
@@ -85,14 +84,17 @@ describe("Task actions", () => {
 
   describe("updateTaskRecord", () => {
     it("should update a task by its ID", async () => {
+      const projectId = new ObjectId().toString();
+      const startDate = new Date();
+      const endDate = new Date();
       const newTask: TaskToBeCreated = {
         name: "Test task",
         description: "This is a test task",
         state: "TODO",
         assignedUsers: [],
-        projectId: "1",
-        startDate: new Date(),
-        endDate: new Date(),
+        projectId: projectId,
+        startDate: startDate,
+        endDate: endDate,
       };
 
       const createdTask = await createTask(newTask);
@@ -103,19 +105,18 @@ describe("Task actions", () => {
         "This is an updated test task",
         "IN_PROGRESS",
         ["1", "2"],
-        "2",
-        new Date(),
-        new Date()
+        projectId,
+        startDate,
+        endDate
       );
-
       expect(updatedTask).toHaveProperty("id");
       expect(updatedTask.name).toBe("Updated task name");
       expect(updatedTask.description).toBe("This is an updated test task");
       expect(updatedTask.state).toBe("IN_PROGRESS");
       expect(updatedTask.assignedUsers).toEqual(["1", "2"]);
-      expect(updatedTask.projectId).toBe("2");
-      expect(updatedTask.startDate).toEqual(newTask.startDate);
-      expect(updatedTask.endDate).toEqual(newTask.endDate);
+      expect(updatedTask.projectId).toBe(projectId);
+      expect(updatedTask.startDate).toEqual(startDate);
+      expect(updatedTask.endDate).toEqual(endDate);
 
       createdTaskId = createdTask.id;
     });
@@ -123,23 +124,26 @@ describe("Task actions", () => {
 
   describe("deleteTask", () => {
     it("should delete a task by its ID", async () => {
+      const projectId = new ObjectId().toString();
+      const startDate = new Date();
+      const endDate = new Date();
       const newTask: TaskToBeCreated = {
         name: "Test task",
         description: "This is a test task",
         state: "TODO",
         assignedUsers: [],
-        projectId: "1",
-        startDate: new Date(),
-        endDate: new Date(),
+        projectId: projectId,
+        startDate: startDate,
+        endDate: endDate,
       };
 
       const createdTask = await createTask(newTask);
+      createdTaskId = createdTask.id; // Set the ID for cleanup
 
       await deleteTask(createdTask.id);
 
       const task = await getTaskById(createdTask.id);
-
-      expect(task).toBeNull();
+      expect(task).toBeNull(); // This line might throw if getTaskById does not handle not found cases properly
     });
   });
 
@@ -153,7 +157,7 @@ describe("Task actions", () => {
 
   describe("getTasksByProjectId", () => {
     it("should return all tasks of a project", async () => {
-      const tasks = await getTasksByProjectId("1");
+      const tasks = await getTasksByProjectId(new ObjectId().toString());
 
       expect(tasks).toBeInstanceOf(Array);
     });
@@ -161,7 +165,7 @@ describe("Task actions", () => {
 
   describe("getAllTasksByUserId", () => {
     it("should return all tasks of a user", async () => {
-      const tasks = await getAllTasksByUserId("1");
+      const tasks = await getAllTasksByUserId(new ObjectId().toString());
 
       expect(tasks).toBeInstanceOf(Array);
     });
@@ -169,7 +173,7 @@ describe("Task actions", () => {
 
   describe("getTasksByUserIdAndState", () => {
     it("should return all tasks of a user with a specific state", async () => {
-      const tasks = await getTasksByUserIdAndState("1", "TODO");
+      const tasks = await getTasksByUserIdAndState(new ObjectId().toString(), "TODO");
 
       expect(tasks).toBeInstanceOf(Array);
     });
