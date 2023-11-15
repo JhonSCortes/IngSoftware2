@@ -1,11 +1,23 @@
 {
   "compilerOptions": {
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "module": "commonjs",
+    "moduleResolution": "node",
     "baseUrl": "src",
     "outDir": "dist",
     "sourceMap": true,
     "noImplicitAny": true,
+    "esModuleInterop": true,
+    "target": "es2017",
+    "strict": true 
   },
-  "include": ["src/**/*", "*.d.ts"],
+  "include": [
+    "src/**/*",
+    "*.d.ts",
+    "__tests__/integration/actions/projects.test.ts",
+    "__tests__/integration/actions/task.test.ts"
+, "tests/integration/actions/users.test.ts", "tests/integration/controllers/authentication.test.ts", "tests/integration/controllers/project.test.ts", "tests/integration/middlewares/index.test.ts"  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }

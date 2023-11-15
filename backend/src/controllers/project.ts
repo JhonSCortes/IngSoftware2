@@ -1,5 +1,5 @@
-import { prisma } from "../index";
 import { createProject, deleteProject, getAllProjectsByName, getProjectById, getProjects,  updateProjectRecord } from "../actions/projects";
+
 import { ProjectToBeCreated } from "interfaces/projects";
 import express from 'express';
 
