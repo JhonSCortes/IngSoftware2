@@ -1,5 +1,6 @@
 import { prisma } from "../db";
 import { Project, ProjectToBeCreated } from "interfaces/projects";
+
 // Acción para obtener todos los proyectos
 export const getProjects = () =>
   prisma.project.findMany({

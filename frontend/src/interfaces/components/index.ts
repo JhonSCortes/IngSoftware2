@@ -1,3 +1,7 @@
+/* 
+Different Props for ReactFC
+*/
+
 interface ComponentInputProps {
     label: string | null,
     type: string,

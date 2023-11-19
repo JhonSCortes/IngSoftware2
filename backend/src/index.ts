@@ -5,8 +5,7 @@ import cookieParser from 'cookie-parser';
 import compression from 'compression';
 import cors from 'cors';
 import router from './router';
-import {prisma} from "./db"
-
+import { prisma } from "./db"
 
 prisma.$connect().then((res) => {
     console.log("CONNECTED");

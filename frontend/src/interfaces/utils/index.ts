@@ -1,3 +1,7 @@
+/*
+Payload interfaces to communicate with the API.
+*/
+
 interface loginPayload {
     email: string,
     password: string
@@ -25,4 +29,4 @@ interface TaskPayload {
 
 
 
-export type {loginPayload, registerPayload, ProjectPayload, TaskPayload};
+export type { loginPayload, registerPayload, ProjectPayload, TaskPayload };

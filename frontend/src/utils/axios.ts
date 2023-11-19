@@ -3,6 +3,7 @@ import { ProjectPayload, TaskPayload, loginPayload, registerPayload } from "../i
 
 const BaseBackendURI = import.meta.env.VITE_BASE_API_URI;
 
+// Function to send a register form.
 const sendRegisterForm = async (payload: registerPayload) => {
   try {
     const res = await axios.post(BaseBackendURI + "/auth/register", {
@@ -16,6 +17,7 @@ const sendRegisterForm = async (payload: registerPayload) => {
   }
 };
 
+// Function to send a login form.
 const sendLoginForm = async (payload: loginPayload): Promise<string | null> => {
   try {
     const res = await axios.post(BaseBackendURI + "/auth/login", {
@@ -75,16 +77,6 @@ const getProjectById = async (projectId: string) => {
     return null;
   }
 };
-
-/* // Update a project by ID (authentication required)
-  const updateProject = async (projectId: string, projectData: any) => {
-    try {
-      const res = await axios.put(`${BaseBackendURI}/project/${projectId}`, projectData);
-      return res.data;
-    } catch (_) {
-      return null;
-    }
-  } */
 
 // Get all projects (authentication required)
 const getAllTasks = async (id: string) => {

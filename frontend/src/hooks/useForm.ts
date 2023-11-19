@@ -4,6 +4,7 @@ import { saveSessionToken } from '../utils/session';
 import { UserContext } from '../context/UserContext';
 import { loginPayload, registerPayload } from '../interfaces/utils';
 
+// Custom hook to init auth forms
 const useForm = (typeForm: string) => {
     const { setSession } = useContext(UserContext);
 

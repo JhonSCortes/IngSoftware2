@@ -6,6 +6,7 @@ import project from './project';
 
 const router = express.Router();
 
+// All endpoints being registered.
 export default (): express.Router =>{
     tasks(router);
     authentication(router);
