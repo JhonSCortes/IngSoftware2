@@ -10,6 +10,10 @@ import {
 import express from "express";
 import { Task, TaskToBeCreated } from "interfaces/task";
 
+/*
+Task related Controllers, executing CRUD operations in the MongoDB.
+*/
+
 export const createTasktLocal = async (values: TaskToBeCreated) => {
   const task = await createTask(values);
   return task;
@@ -23,7 +27,7 @@ export const CreateTaskMethod = async (
     const { name, description, state, assignedUsers, projectId, startDate, endDate } = req.body;
 
     if (!name || !description || !state || !assignedUsers || !projectId) {
-        return res.status(400).json({ error: "Faltan datos obligatorios" });
+      return res.status(400).json({ error: "Faltan datos obligatorios" });
     }
 
     const Proyect = await createTasktLocal({
@@ -78,7 +82,7 @@ export const GetTask = async (req: express.Request, res: express.Response) => {
   try {
     const { id } = req.params;
 
-    const task = await getTaskById(id); 
+    const task = await getTaskById(id);
 
     return res.json(task);
   } catch (error) {
@@ -112,9 +116,9 @@ export const updateTaskMethod = async (
     const { name, description, state, assignedUsers, projectId, startDate, endDate } = req.body;
 
     if (!name || !description || !state || !assignedUsers || !projectId) {
-        return res.status(400).json({ error: "Faltan datos obligatorios" });
+      return res.status(400).json({ error: "Faltan datos obligatorios" });
     }
-  
+
     const task = await updateTaskRecord(
       id,
       name,
@@ -149,6 +153,6 @@ export const getAllTasksByname = async (req: express.Request, res: express.Respo
     return res.status(200).json(tasks);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: 'Se produjo un error interno en el servidor:\n' +error });
+    return res.status(500).json({ error: 'Se produjo un error interno en el servidor:\n' + error });
   }
 };

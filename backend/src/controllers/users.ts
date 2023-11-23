@@ -1,6 +1,10 @@
 import express from 'express';
 import { deleteUserRecord, getUsers, updateUserRecord } from '../actions/users';
 
+/*
+User related query operations, to manage web app users.
+*/
+
 export const getAllUsers = async (req: express.Request, res: express.Response) => {
   try {
     const users = await getUsers();
@@ -8,7 +12,7 @@ export const getAllUsers = async (req: express.Request, res: express.Response) =
     return res.status(200).json(users);
   } catch (error) {
     console.log(error);
-    return res.status(500).json({ error: 'Se produjo un error interno en el servidor:\n' +error });
+    return res.status(500).json({ error: 'Se produjo un error interno en el servidor:\n' + error });
   }
 };
 

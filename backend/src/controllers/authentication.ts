@@ -3,11 +3,13 @@ import { getUserByEmail, createUserRecord, getUserAuthentication, updateUserSess
 import { authentication, random } from '../helpers';
 import { UserToBeCreated } from 'interfaces/users';
 
+// Creates an user record.
 export const createUser = async (values: UserToBeCreated) => {
   const user = await createUserRecord(values);
   return user;
 };
 
+// Register controller.
 export const register = async (req: express.Request, res: express.Response) => {
   try {
     const { email, password, username } = req.body;
@@ -40,6 +42,7 @@ export const register = async (req: express.Request, res: express.Response) => {
   }
 }
 
+//SignIn controller.
 export const login = async (req: express.Request, res: express.Response) => {
   try {
     const { email, password } = req.body;

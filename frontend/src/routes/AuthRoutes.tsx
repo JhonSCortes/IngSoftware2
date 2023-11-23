@@ -2,6 +2,7 @@ import AuthPage from '../pages/auth';
 import AuthPasswordPage from '../pages/auth.password';
 import { Routes, Route } from 'react-router-dom'
 
+// Routes for Authentication.
 export const AuthRoutes = () => {
   return (
     <>

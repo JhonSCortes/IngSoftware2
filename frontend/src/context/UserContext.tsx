@@ -5,4 +5,4 @@ export type sessionContext = {
     setSession: (c: string) => void
 }
 
-export const UserContext = createContext<sessionContext>({ session: '', setSession: () => {} });
+export const UserContext = createContext<sessionContext>({ session: '', setSession: () => { } });

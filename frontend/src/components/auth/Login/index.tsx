@@ -55,7 +55,7 @@ const LoginComponent: React.FC<Props> = (props) => {
           <InputComponent label='Email' type='text' inputController={(type: string, value: string) => handleFormInfo(type, value)} />
           <InputComponent label='Password' type='password' inputController={(type: string, value: string) => handleFormInfo(type, value)} />
           <CheckboxComponent text='Remember me' label={null} inputController={(type: string, value: string) => handleFormInfo(type, value)} />
-          <InputComponent type='submit' label={null} inputController={null}/>
+          <InputComponent type='submit' label={null} inputController={null} />
         </form>
         <span className="auth_footer_text"> New here? Open your task managing account! <a className="auth_footer_redirect" onClick={(e) => changeToRegisterComponent(e)}> Register here  </a> </span>
       </div>
